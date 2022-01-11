@@ -13,7 +13,7 @@ const DicesS = () => {
   const navigation = useNavigation();
   return (
   <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
-	  <View style={{justifyContent: 'center', alignItems: 'center', backgroundColor:'grey'}}>
+	  <View style={{justifyContent: 'center', alignItems: 'center', backgroundColor:'royalblue'}}>
 		<Text style={styles.text}>
 			  Wybierz kość
 		</Text>
@@ -21,7 +21,6 @@ const DicesS = () => {
 		<TouchableOpacity style={{position: "relative", marginTop: 20 }} onPress={() => navigation.navigate(roll4)} >
 			<Image
 			style={{
-				backgroundColor: "grey",
 				width: 150,
 				height: 150,
 				borderRadius: 15,
