@@ -13,7 +13,7 @@ const DicesS = () => {
   const navigation = useNavigation();
   return (
   <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
-	  <View style={{justifyContent: 'center', alignItems: 'center', backgroundColor:'royalblue'}}>
+	  <View style={{justifyContent: 'center', alignItems: 'center', backgroundColor:'#ccc'}}>
 		<Text style={styles.text}>
 			  Wybierz kość
 		</Text>
