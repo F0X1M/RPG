@@ -1,13 +1,23 @@
-import React, {Component, Fragment} from 'react';
+import React, { Component, Fragment } from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, Button } from 'react-native';
+import { Fab, Icon, Box, Center, NativeBaseProvider } from "native-base"
 import { createStackNavigator } from '@react-navigation/stack';
+import { AntDesign } from "@expo/vector-icons"
 
-export default function character({navigation}) {
+
+export default function character({ navigation }) {
   return (
-    <View style = {styles.container}>
-        <Button title = "Second screen" onPress = {()=>navigation.navigate('SecondS')}/>
-    </View>
+    <NativeBaseProvider>
+      <Box position="relative" h={100} w="100%">
+        <Fab
+          position="absolute"
+          size="sm"
+          icon={<Icon color="white" as={<AntDesign name="plus" />} size="sm" />}
+          onPress={() => navigation.navigate('CharC')}
+        />
+      </Box>
+    </NativeBaseProvider>
   );
 }
 
