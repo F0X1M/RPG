@@ -1,13 +1,59 @@
 import React, {Component, Fragment} from 'react';
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, Button } from 'react-native';
-import { createStackNavigator } from '@react-navigation/stack';
+import { StyleSheet, View, Button } from 'react-native';
+import {Select, VStack, CheckIcon, TextArea, Radio, Text, Center, NativeBaseProvider} from "native-base"
 
 export default function charactercreate({navigation}) {
+  const [value, setValue] = React.useState("one")
+  let [service, setService] = React.useState("")
   return (
-    <View style = {styles.container}>
-        <Button title = "Second screen" onPress = {()=>navigation.navigate('SecondS')}/>
-    </View>
+    <NativeBaseProvider>
+      <Center>
+        <Text>Character Name</Text>
+       <TextArea
+          h={10}
+          placeholder="Name"
+          w={{
+            base: "70%",
+            md: "20%",
+          }}
+        />
+        <Text>Choose Race</Text>
+        <VStack alignItems="center" space={4}>
+          <Select
+            selectedValue={service}
+            minWidth="70%"
+            accessibilityLabel="Choose Race"
+            placeholder="Choose race"
+            _selectedItem={{
+              bg: "teal.600",
+              endIcon: <CheckIcon size="5" />,
+            }}
+            mt={1}
+            onValueChange={(itemValue) => setService(itemValue)}
+          >
+            <Select.Item label="Human" value="hum" />
+            <Select.Item label="Elf" value="elf" />
+            <Select.Item label="Dwarf" value="dwar" />
+          </Select>
+        </VStack>
+        <Text>Choose Sex</Text>
+        <Radio.Group
+          name="Sex"
+          accessibilityLabel="Character Sex"
+          value={value}
+          onChange={(nextValue) => {
+            setValue(nextValue)
+          }}
+        >
+          <Radio value="Male" my={1}>
+            Male
+          </Radio>
+          <Radio value="Female" my={1}>
+            Female
+          </Radio>
+      </Radio.Group>
+    </Center>
+    </NativeBaseProvider>
   );
 }
 
