@@ -1,12 +1,23 @@
-import React, {Component, Fragment} from 'react';
-import { StyleSheet, Text, View, Button } from 'react-native';
-import { createStackNavigator } from '@react-navigation/stack';
+import React, {Component, Fragment, useState} from 'react';
+import { StyleSheet, Text, View } from 'react-native';
+import { Avatar, Button, Card, Title, Paragraph } from 'react-native-paper';
+
+const LeftContent = props => <Avatar.Icon {...props} icon="notebook-outline" />
 
 export default function notesscr({navigation}) {
+  const [title, setTitle] = useState("Jakis tekst");
   return (
-    <View style = {styles.container}>
-        <Button title = "Second screen" onPress = {()=>navigation.navigate('SecondS')}/>
-    </View>
+    <Card>
+      <Card.Title title="Note Title" subtitle="Note Subtitle" left={LeftContent} />
+        <Card.Content>
+          <Title>{title}</Title>
+          <Paragraph>Note content</Paragraph>
+        </Card.Content>
+      <Card.Actions>
+        <Button onPress={()=>setTitle("narazie")}>Edit</Button>
+        <Button>Delete</Button>
+      </Card.Actions>
+    </Card>
   );
 }
 
