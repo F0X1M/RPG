@@ -141,7 +141,7 @@ export default function home({navigation}) {
               bg="red.500"
               colorScheme="red"
               borderRadius="full"
-              onPress = {()=>navigation.navigate('SecondS')}
+              onPress = {()=>navigation.navigate('HelpScr')}
               icon={
                 <Icon
                   as={MaterialCommunityIcons}
