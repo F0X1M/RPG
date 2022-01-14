@@ -1,23 +1,52 @@
-import React, {Component, Fragment, useState} from 'react';
+import React, { Component, Fragment, useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import { Avatar, Button, Card, Title, Paragraph } from 'react-native-paper';
+import { AlertDialog, Modal, Fab, Icon, Button, Box, Center, NativeBaseProvider } from "native-base"
+import { MaterialCommunityIcons } from "@expo/vector-icons"
 
-const LeftContent = props => <Avatar.Icon {...props} icon="notebook-outline" />
+function addNotes() {
 
-export default function notesscr({navigation}) {
-  const [title, setTitle] = useState("Jakis tekst");
+}
+
+export default function notesscr({ navigation }) {
+
+  const [isOpen, setIsOpen] = React.useState(false)
+  const onClose = () => setIsOpen(false)
+  const cancelRef = React.useRef(null)
+
   return (
-    <Card>
-      <Card.Title title="Note Title" subtitle="Note Subtitle" left={LeftContent} />
-        <Card.Content>
-          <Title>{title}</Title>
-          <Paragraph>Note content</Paragraph>
-        </Card.Content>
-      <Card.Actions>
-        <Button onPress={()=>setTitle("narazie")}>Edit</Button>
-        <Button>Delete</Button>
-      </Card.Actions>
-    </Card>
+    <NativeBaseProvider>
+      <Center flex={1} px="3">
+        <Box h={400} w="100%">
+          <Fab
+            borderRadius="full"
+            colorScheme="indigo"
+            placement="bottom-right"
+            onPress={() => setIsOpen(!isOpen)}
+            icon={
+              <Icon
+                color="white"
+                as={<MaterialCommunityIcons name="file-plus-outline" />}
+                size="4"
+              />
+            }
+            label="Add note"
+          />
+        </Box>
+      </Center>
+
+      <Center>
+        <AlertDialog leastDestructiveRef={cancelRef} isOpen={isOpen} onClose={onClose}>
+          <AlertDialog.Content>
+            <AlertDialog.CloseButton />
+            <AlertDialog.Header>Goblin</AlertDialog.Header>
+            <AlertDialog.Body>
+              This will remove all data relating to Alex. This action cannot be
+              reversed. Deleted data can not be recovered.
+            </AlertDialog.Body>
+          </AlertDialog.Content>
+        </AlertDialog>
+      </Center>
+    </NativeBaseProvider>
   );
 }
 

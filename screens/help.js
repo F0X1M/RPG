@@ -1,7 +1,7 @@
 import React, {Component, Fragment} from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
-import { AlertDialog, Button, Center, NativeBaseProvider } from "native-base"
+import { AlertDialog, Center, NativeBaseProvider } from "native-base"
 
 export default function help({navigation}) {
   
