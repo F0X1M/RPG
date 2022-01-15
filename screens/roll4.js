@@ -6,6 +6,7 @@ import { Accelerometer } from 'expo-sensors';
 
 const roll4 = () => {
 const navigation = useNavigation();
+const sensitivity = 3;
   const [RandomNumber,setRandomNumber] = useState(0);
   const [data, setData] = useState({
     x: 0,
@@ -42,10 +43,13 @@ const navigation = useNavigation();
 
   var { x, y, z } = data;
 
+
 const GenerateRandomNumber = () => {
-  if ((x > 3 || x < -3) && (y > 3 || y < -3 )&& (z> 3 || z < -3)){
-      console.log('JEBUT');
-      setRandomNumber(Math.floor(Math.random() * 4) + 1);
+  if ((x > sensitivity || x < -sensitivity) &&
+    (y > sensitivity || y < -sensitivity) || (x > sensitivity || x < -sensitivity) &&
+    (z > sensitivity || z < -sensitivity) || (y > sensitivity || y < -sensitivity) &&
+    (z > sensitivity || z < -sensitivity)) {  
+    setRandomNumber(Math.floor(Math.random() * 4) + 1);
     _unsubscribe();
     x = 0;
     y = 0;
@@ -61,17 +65,9 @@ console.log(x,y,z);
       {GenerateRandomNumber()}    
       <Text style={styles.text}>{RandomNumber}</Text>
       <View style={[{ width: "60%", margin: 10, backgroundColor: "red" }]}>
-        <Button 
-        //onPress={this.GenerateRandomNumber}
-        title='Losuj'
-        color="#BBBBBB"
-        />
+      </View>        
       </View>
-        
-      </View>
- 
     );
-    
 }
  
 const styles = StyleSheet.create(
