@@ -22,23 +22,22 @@ export default function help({navigation}) {
 			<AlertDialog.Header>Help</AlertDialog.Header>
       <AlertDialog.Body>
 		
-              Notes: 
-              Możliwość zapisywania notatek z rozgrywki.
+              Notes:<></>
+              Możliwość zapisywania notatek z rozgrywki.<br/>
 
-              Character:
-              W tej zakładce tworzymy naszą postać, w pierwszej kolejności należy podać imię. Kolejnym etapem jest wybranie rasy. Użytkownik do wyboru ma trzy klasy postaci człowiek, elf i krasnolud. Na końcu wybieramy płeć.
+              Character:<></>
+              W tej zakładce tworzymy naszą postać. Podajemy imię, wiek, klasę postaci oraz rasę.<br/>
 
-              Enemy:
-              W tej zakładce znajduje się lista wrogo nastawionych do nas jednostek wraz z opisem ich roli.
+              Enemy:<></>
+              W tej zakładce znajduje się lista przeciwników.<br/>
 
-              Dices:
-              W tej zakładce mamy dostępne kostki RPG. Wybieramy kość, która jest nam potrzebna podczas rozgrywki, następnie w celu wylosowania liczby wybieramy przycisk "Losuj kością".
-              W zestawieniu znajdują się kości: d4, d6, d8, d10, d12, d20
+              Dices:<></>
+              W tej zakładce mamy dostępne kostki do losowania. Dostępne kości: d4, d6, d8, d10, d12, d20<br/>
 
-              Autorzy:
-              Staniszewski Hubert
-              Skrobot Daniel
-              Stępień Wiktoria
+              Autorzy:<></>
+              Staniszewski Hubert<></>
+              Skrobot Daniel<></>
+              Stępień Wiktoria<></>
         
 			</AlertDialog.Body>
 		  </AlertDialog.Content>
@@ -51,7 +50,7 @@ export default function help({navigation}) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#ccc',
     alignItems: 'center',
     justifyContent: 'center',
   },

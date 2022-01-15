@@ -1,6 +1,6 @@
 import React, { Component, Fragment, useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import { AlertDialog, Modal, Fab, Icon, Button, Box, Center, NativeBaseProvider } from "native-base"
+import { FormControl, Input, Modal, Fab, Icon, Button, Box, Center, NativeBaseProvider, TextArea } from "native-base"
 import { MaterialCommunityIcons } from "@expo/vector-icons"
 
 function addNotes() {
@@ -8,11 +8,9 @@ function addNotes() {
 }
 
 export default function notesscr({ navigation }) {
-
-  const [isOpen, setIsOpen] = React.useState(false)
-  const onClose = () => setIsOpen(false)
-  const cancelRef = React.useRef(null)
-
+  
+  const [showModal, setShowModal] = useState(false)
+  
   return (
     <NativeBaseProvider>
       <Center flex={1} px="3">
@@ -21,7 +19,7 @@ export default function notesscr({ navigation }) {
             borderRadius="full"
             colorScheme="indigo"
             placement="bottom-right"
-            onPress={() => setIsOpen(!isOpen)}
+            onPress={() => setShowModal(true)}
             icon={
               <Icon
                 color="white"
@@ -29,31 +27,59 @@ export default function notesscr({ navigation }) {
                 size="4"
               />
             }
-            label="Add note"
+            label="New note"
           />
         </Box>
       </Center>
 
-      <Center>
-        <AlertDialog leastDestructiveRef={cancelRef} isOpen={isOpen} onClose={onClose}>
-          <AlertDialog.Content>
-            <AlertDialog.CloseButton />
-            <AlertDialog.Header>Goblin</AlertDialog.Header>
-            <AlertDialog.Body>
-              This will remove all data relating to Alex. This action cannot be
-              reversed. Deleted data can not be recovered.
-            </AlertDialog.Body>
-          </AlertDialog.Content>
-        </AlertDialog>
+      <Center flex={1} px="3">
+        <Modal isOpen={showModal} onClose={() => setShowModal(false)}>
+          <Modal.Content maxWidth="400px">
+            <Modal.CloseButton />
+            <Modal.Header>New note</Modal.Header>
+            <Modal.Body>
+              <FormControl>
+                <FormControl.Label>Title</FormControl.Label>
+                <Input placeholder="Title"/>
+              </FormControl>
+              <FormControl mt="1">
+                <FormControl.Label>Note Content</FormControl.Label>
+                <TextArea placeholder="Note"></TextArea>
+              </FormControl>
+            </Modal.Body>
+            <Modal.Footer>
+              <Button.Group space={1}>
+                <Button
+                  variant="ghost"
+                  colorScheme="blueGray"
+                  onPress={() => {
+                    setShowModal(false)
+                  }}
+                >
+                  Cancel
+                </Button>
+                <Button
+                  onPress={() => {
+                    setShowModal(false)
+                  }}
+                >
+                  Save
+                </Button>
+              </Button.Group>
+            </Modal.Footer>
+          </Modal.Content>
+        </Modal>
       </Center>
     </NativeBaseProvider>
+    
+    
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#ccc',
     alignItems: 'center',
     justifyContent: 'center',
   },

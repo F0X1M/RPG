@@ -134,7 +134,7 @@ const DicesS = () => {
 const styles = StyleSheet.create({
   text: {
     position: "relative",
-		backgroundColor: "transparent",
+		backgroundColor: "#ccc",
 		fontSize: 20,
 		color: "black",
 		fontWeight: "bold",
