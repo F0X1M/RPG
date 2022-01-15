@@ -18,7 +18,7 @@ const DicesS = () => {
 			  Wybierz kość
 		</Text>
 
-		<TouchableOpacity style={{position: "relative", marginTop: 20 }} onPress={() => navigation.navigate(roll4)} >
+		<TouchableOpacity style={{position: "relative", marginTop: 20 }} onPress={() => navigation.navigate('roll4')} >
 			<Image
 			style={{
 				width: 150,
