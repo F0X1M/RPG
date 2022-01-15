@@ -22,22 +22,22 @@ export default function help({navigation}) {
 			<AlertDialog.Header>Help</AlertDialog.Header>
       <AlertDialog.Body>
 		
-              Notes:<></>
-              Możliwość zapisywania notatek z rozgrywki.<br/>
+              Notes:{ }
+              Możliwość zapisywania notatek z rozgrywki.{"\n"}
 
-              Character:<></>
-              W tej zakładce tworzymy naszą postać. Podajemy imię, wiek, klasę postaci oraz rasę.<br/>
+              Character:{ }
+              W tej zakładce tworzymy naszą postać. Podajemy imię, wiek, klasę postaci oraz rasę.{"\n"}
 
-              Enemy:<></>
-              W tej zakładce znajduje się lista przeciwników.<br/>
+              Enemy:{ }
+              W tej zakładce znajduje się lista przeciwników.{"\n"}
 
-              Dices:<></>
-              W tej zakładce mamy dostępne kostki do losowania. Dostępne kości: d4, d6, d8, d10, d12, d20<br/>
+              Dices:{ }
+              W tej zakładce mamy dostępne kostki do losowania. Dostępne kości: d4, d6, d8, d10, d12, d20{"\n"}
 
-              Autorzy:<></>
-              Staniszewski Hubert<></>
-              Skrobot Daniel<></>
-              Stępień Wiktoria<></>
+              Autorzy:{ }
+              Staniszewski Hubert{ }
+              Skrobot Daniel{ }
+              Stępień Wiktoria{ }
         
 			</AlertDialog.Body>
 		  </AlertDialog.Content>
