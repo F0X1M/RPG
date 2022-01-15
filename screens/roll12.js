@@ -6,7 +6,7 @@ import { Accelerometer } from 'expo-sensors';
 
 const roll12 = () => {
   const navigation = useNavigation();
-  const sensitivity = 2;
+  const sensitivity = 1;
   const [RandomNumber, setRandomNumber] = useState(0);
   const [data, setData] = useState({
     x: 0,
