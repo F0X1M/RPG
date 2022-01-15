@@ -6,7 +6,7 @@ import { Accelerometer } from 'expo-sensors';
 
 const roll10 = () => {
   const navigation = useNavigation();
-  const sensitivity = 3;
+  const sensitivity = 2;
   const [RandomNumber, setRandomNumber] = useState(0);
   const [data, setData] = useState({
     x: 0,
@@ -39,6 +39,7 @@ const roll10 = () => {
 
   useEffect(() => {
     _subscribe();
+    return () => _unsubscribe();
   }, []);
 
   var { x, y, z } = data;
@@ -50,7 +51,7 @@ const roll10 = () => {
       (z > sensitivity || z < -sensitivity) || (y > sensitivity || y < -sensitivity) &&
       (z > sensitivity || z < -sensitivity)) {
       setRandomNumber(Math.floor(Math.random() * 10) + 1);
-      _unsubscribe();
+      //_unsubscribe();
       x = 0;
       y = 0;
       z = 0;

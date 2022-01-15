@@ -36,7 +36,7 @@ const DicesS = () => {
 			}}>
 			d4
 		</Text>
-		<TouchableOpacity style={{ position: "relative", marginTop: 20 }} onPress={() => navigation.navigate(roll6)} >
+		<TouchableOpacity style={{ position: "relative", marginTop: 20 }} onPress={() => navigation.navigate('roll6')} >
 		<Image
 			style={{
 			width: 150,
@@ -54,7 +54,7 @@ const DicesS = () => {
 			}}>
 			d6
 		</Text>
-		<TouchableOpacity style={{ position: "relative", marginTop: 20 }} onPress={() => navigation.navigate(roll8)} >
+		<TouchableOpacity style={{ position: "relative", marginTop: 20 }} onPress={() => navigation.navigate('roll8')} >
 		<Image
 			style={{
 			width: 150,
@@ -72,7 +72,7 @@ const DicesS = () => {
 			}}>
 			d8
 		</Text>
-		<TouchableOpacity style={{ position: "relative", marginTop: 20 }} onPress={() => navigation.navigate(roll10)} >
+		<TouchableOpacity style={{ position: "relative", marginTop: 20 }} onPress={() => navigation.navigate('roll10')} >
 		<Image
 			style={{
 			width: 150,
@@ -90,7 +90,7 @@ const DicesS = () => {
 			}}>
 			d10
 		</Text>
-		<TouchableOpacity style={{ position: "relative", marginTop: 20 }} onPress={() => navigation.navigate(roll12)} >
+		<TouchableOpacity style={{ position: "relative", marginTop: 20 }} onPress={() => navigation.navigate('roll12')} >
 		<Image
 			style={{
 			width: 150,
@@ -108,7 +108,7 @@ const DicesS = () => {
 			}}>
 			d12
 		</Text>
-		<TouchableOpacity style={{ position: "relative", marginTop: 20 }} onPress={() => navigation.navigate(roll20)} >
+		<TouchableOpacity style={{ position: "relative", marginTop: 20 }} onPress={() => navigation.navigate('roll20')} >
 		<Image
 			style={{
 			width: 150,
