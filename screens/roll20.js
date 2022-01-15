@@ -59,7 +59,6 @@ const roll20 = () => {
       data.z = 0;
     }
   };
-  console.log(x, y, z);
   return (
     <View style={styles.container} >
       {GenerateRandomNumber()}
