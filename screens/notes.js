@@ -3,51 +3,52 @@ import { StyleSheet, Text, View } from 'react-native';
 import { FormControl, Input, Modal, Fab, Icon, Button, Box, Center, NativeBaseProvider, TextArea } from "native-base"
 import { MaterialCommunityIcons } from "@expo/vector-icons"
 import axios from 'axios';
+import {RPG_BASE_URL} from '../DBDetails.js';
 
 export default function notesscr({ navigation }) {
-  
+
+
+  const [id, setID] = useState(0);
+  const [title, setTitle] = useState('');
+  const [content, setContent] = useState('');
+ 
   const [showModal, setShowModal] = useState(false)
 
-  const [userId, setUserId] = useState(1);
-  const [user, setUser] = useState(null);
-  const [isLoading, setIsLoading] = useState(false);
-  const [hasError, setErrorFlag] = useState(false);
-  const changeUserIdHandler = () => {
-    setUserId((userId) => (userId === 3 ? 1 : userId + 1));
-  };
+  const [people, setPeople] = useState([])
 
-    useEffect(() => {
-      const source = axios.CancelToken.source();
-      const url = `https://api.jsonbin.io/b/61e53a5bba87c130e3e9b266`;
-      const fetchUsers = async () => {
-        try {
-          setIsLoading(true);
-          const response = await axios.get(url,{
-            headers: {
-               "secret-key": "$2b$10$KilzUaVCnErIvA.3H9YLl.WpdkoczBs1wSJvxflNOozZtj5SoHYb6",
-            },
-          });
-          if (response.status === 200) {
-            console.log("HERE");
-            setUser(response.data.data);
-            setIsLoading(false);
-            return;
-          } else {
-            throw new Error("Failed to fetch users");
-          }
-        } catch (error) {
-          if(axios.isCancel(error)){
-            console.log('Data fetching cancelled');
-          }else{
-            setErrorFlag(true);
-            setIsLoading(false);
-          }
-        }
-      };
-      fetchUsers();
-      return () => source.cancel("Data fetching cancelled");
-    }, [userId]);
-  
+  /*
+  const hook = () => {
+    axios.get(RPG_BASE_URL+'/notes')
+      .then(function (response) {
+        // handle success
+        console.log(response);
+      })
+      .catch(function (error) {
+        // handle error
+        console.log(error);
+      })
+      .then(function () {
+        setPeople(response.data)
+      });
+  }
+
+  */
+  //useEffect(hook, [])
+
+  /*
+  axios.post(RPG_BASE_URL + '/notes', {
+    firstName: '',
+    lastName: ''
+  })
+    .then(function (response) {
+      console.log(response);
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+  console.log('render', people.length, 'people');
+  */
+  console.log(value.title);
   return (
     <NativeBaseProvider>
       <Center flex={1} px="3">
@@ -77,7 +78,8 @@ export default function notesscr({ navigation }) {
             <Modal.Body>
               <FormControl>
                 <FormControl.Label>Title</FormControl.Label>
-                <Input placeholder="Title"/>
+                <Input onChangeText={(text) => handleChange({ type: `title`, text })}
+                  value={value.title} placeholder="Title"/>
               </FormControl>
               <FormControl mt="1">
                 <FormControl.Label>Note Content</FormControl.Label>

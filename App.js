@@ -19,8 +19,10 @@ import roll10 from './screens/roll10';
 import roll12 from './screens/roll12';
 import roll20 from './screens/roll20';
 
+
+
 const Stack = createNativeStackNavigator();
-const Tab = createBottomTabNavigator();
+//const Tab = createBottomTabNavigator();
 
 export default function App() {
   return (
