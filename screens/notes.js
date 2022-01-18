@@ -24,6 +24,45 @@ export default function notesscr({ navigation }) {
   const [showModal, setShowModal] = useState(false)
 
   const [people, setPeople] = useState([])
+  const [userId, setUserId] = useState(1)
+  const [user, setUser] = useState(null)
+  const [isLoading, setIsLoading] = useState(false)
+  const [hasError, setErrorFlag] = useState(false)
+  const changeUserIdHandler = () => {
+    setUserId((userId) => (userId === 3 ? 1 : userId + 1))
+  };
+
+    useEffect(() => {
+      const source = axios.CancelToken.source();
+      const url = `https://api.jsonbin.io/b/61e53a5bba87c130e3e9b266`;
+      const fetchUsers = async () => {
+        try {
+          setIsLoading(true);
+          const response = await axios.get(url,{
+            headers: {
+               "secret-key": "$2b$10$KilzUaVCnErIvA.3H9YLl.WpdkoczBs1wSJvxflNOozZtj5SoHYb6",
+            },
+          });
+          if (response.status === 200) {
+            console.log("HERE");
+            setUser(response.data.data);
+            setIsLoading(false);
+            return;
+          } else {
+            throw new Error("Failed to fetch users");
+          }
+        } catch (error) {
+          if(axios.isCancel(error)){
+            console.log('Data fetching cancelled');
+          }else{
+            setErrorFlag(true);
+            setIsLoading(false);
+          }
+        }
+      };
+      fetchUsers();
+      return () => source.cancel("Data fetching cancelled");
+    }, [userId]);
   
   const [task, setTask] = useState(
   { 

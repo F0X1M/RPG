@@ -13,7 +13,7 @@ import {
   NativeBaseProvider,
   ZStack,
 } from "native-base"
-import { MaterialCommunityIcons, MaterialIcons } from "@expo/vector-icons";
+import { MaterialCommunityIcons} from "@expo/vector-icons";
 import { NavigationContainer } from '@react-navigation/native';
 
 

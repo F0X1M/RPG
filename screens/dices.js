@@ -2,13 +2,6 @@ import * as React from 'react';
 import { View, Text, StyleSheet, Image, ScrollView, TouchableOpacity } from "react-native";
 import { useNavigation } from "@react-navigation/core";
 
-import roll4 from './roll4.js';
-import roll6 from './roll6.js';
-import roll8 from './roll8.js';
-import roll10 from './roll10.js';
-import roll12 from './roll12.js';
-import roll20 from './roll20.js';
-
 const DicesS = () => {
   const navigation = useNavigation();
   return (
