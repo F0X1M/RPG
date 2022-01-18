@@ -8,12 +8,12 @@ export default function notesscr({ navigation }) {
   
   const [showModal, setShowModal] = useState(false)
 
-  const [userId, setUserId] = useState(1);
-  const [user, setUser] = useState(null);
-  const [isLoading, setIsLoading] = useState(false);
-  const [hasError, setErrorFlag] = useState(false);
+  const [userId, setUserId] = useState(1)
+  const [user, setUser] = useState(null)
+  const [isLoading, setIsLoading] = useState(false)
+  const [hasError, setErrorFlag] = useState(false)
   const changeUserIdHandler = () => {
-    setUserId((userId) => (userId === 3 ? 1 : userId + 1));
+    setUserId((userId) => (userId === 3 ? 1 : userId + 1))
   };
 
     useEffect(() => {

@@ -51,6 +51,9 @@ export default function charactercreate({navigation}) {
           <Radio value="Female" my={1}>
             Female
           </Radio>
+          <Radio value="Yes" my={1}>
+            Yes Please
+          </Radio>
       </Radio.Group>
     </Center>
     </NativeBaseProvider>
