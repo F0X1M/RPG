@@ -4,79 +4,34 @@ import { FormControl, Input, Modal, Fab, Icon, Button, Box, Center, NativeBasePr
 import { ScrollView } from 'react-native';
 import { MaterialCommunityIcons } from "@expo/vector-icons"
 import axios from 'axios';
-import {RPG_BASE_URL} from '../DBDetails.js';
+import { RPG_BASE_URL } from '../DBDetails.js';
 
 import Task from '../Components/Task';
 
 export default function notesscr({ navigation }) {
 
+  const [title_set, setTitle] = useState();
+  const [content_set, setContent] = useState();
+
+  const [showNote, setShowNote] = useState(false)
 
 
-
+  const [showModal, setShowModal] = useState(false)
 
   const [taskItems, setTaskItems] = useState([]);
 
+  const [itemContent, setItemContent] = useState();
 
-  const [id, setID] = useState(0);
-  const [title, setTitle] = useState('');
-  const [content, setContent] = useState('');
- 
-  const [showModal, setShowModal] = useState(false)
 
-  const [people, setPeople] = useState([])
-  const [userId, setUserId] = useState(1)
-  const [user, setUser] = useState(null)
-  const [isLoading, setIsLoading] = useState(false)
-  const [hasError, setErrorFlag] = useState(false)
-  const changeUserIdHandler = () => {
-    setUserId((userId) => (userId === 3 ? 1 : userId + 1))
-  };
 
-    useEffect(() => {
-      const source = axios.CancelToken.source();
-      const url = `https://api.jsonbin.io/b/61e53a5bba87c130e3e9b266`;
-      const fetchUsers = async () => {
-        try {
-          setIsLoading(true);
-          const response = await axios.get(url,{
-            headers: {
-               "secret-key": "$2b$10$KilzUaVCnErIvA.3H9YLl.WpdkoczBs1wSJvxflNOozZtj5SoHYb6",
-            },
-          });
-          if (response.status === 200) {
-            console.log("HERE");
-            setUser(response.data.data);
-            setIsLoading(false);
-            return;
-          } else {
-            throw new Error("Failed to fetch users");
-          }
-        } catch (error) {
-          if(axios.isCancel(error)){
-            console.log('Data fetching cancelled');
-          }else{
-            setErrorFlag(true);
-            setIsLoading(false);
-          }
-        }
-      };
-      fetchUsers();
-      return () => source.cancel("Data fetching cancelled");
-    }, [userId]);
-  
-  const [task, setTask] = useState(
-  { 
-    title: ' ',
+  const checkItem = (item) => {
+    setItemContent(item);
+    setShowNote(true)
   }
-  );
-
-
   const handleAddTask = () => {
-    //Keyboard.dismiss();
-    setTaskItems([...taskItems, task])
-    //setTask(null);
+    setTaskItems([...taskItems, { title_set, content_set }])
+    setTitle(null);
   }
-
 
   const hook = () => {
     axios.get(RPG_BASE_URL + '/notes')
@@ -87,11 +42,17 @@ export default function notesscr({ navigation }) {
         });
       })
   }
+  useEffect(
+    () => {
+      hook()
+    }
+    , [])
 
-  useEffect(hook, [])
+  console.log(taskItems)
+  //console.log(index_note)
   //console.log('render', people.length, 'people');
 
- // console.log('render', people.length, 'people');
+  // console.log('render', people.length, 'people');
   /*
   axios.post(RPG_BASE_URL + '/notes', {
     firstName: '',
@@ -111,33 +72,38 @@ export default function notesscr({ navigation }) {
   //console.log(title);
   //console.log(people);
   //console.log(people.length);
-  console.log(title);
-  console.log(content);
-  console.log(task);
+  //console.log(title_set)
+  //console.log(content_set)
+  //console.log(task)
+
+
+  console.log(taskItems.length)
+
   return (
 
 
-    
 
-      <View style={styles.container}>
-        <ScrollView
-          contentContainerStyle={{
-            flexGrow: 1
-          }}>
-          <View style={styles.tasksWrapper}>
-            <Text style={styles.sectionTitle}>Notes</Text>
-            <View style={styles.items}>
-              {
+
+    <View style={styles.container}>
+      <ScrollView
+        contentContainerStyle={{
+          flexGrow: 1
+        }}>
+        <View style={styles.tasksWrapper}>
+          <Text style={styles.sectionTitle}>Notes</Text>
+          <View style={styles.items}>
+            {
               taskItems.map((item, index) => {
                 return (
-                  <TouchableOpacity key={index} onPress={() => completeTask(index)}>
+                  <TouchableOpacity key={index} onPress={() => checkItem(item)}>
                     <Task text={item} />
                   </TouchableOpacity>
                 )
               })
-              }
-            </View>
+            }
           </View>
+        </View>
+
         <NativeBaseProvider>
           <Center flex={1} px="3">
             <Box h={400} w="100%">
@@ -166,7 +132,7 @@ export default function notesscr({ navigation }) {
                 <Modal.Body>
                   <FormControl>
                     <FormControl.Label>Title</FormControl.Label>
-                    <Input placeholder="Title" onChangeText={message => setTask(message)} />
+                    <Input placeholder="Title" onChangeText={message => setTitle(message)} />
                   </FormControl>
                   <FormControl mt="1">
                     <FormControl.Label>Note Content</FormControl.Label>
@@ -186,9 +152,8 @@ export default function notesscr({ navigation }) {
                     </Button>
                     <Button
                       onPress={() => {
-                        setShowModal(false)
                         handleAddTask()
-                        
+                        setShowModal(false)
                       }}
                     >
                       Save
@@ -198,9 +163,21 @@ export default function notesscr({ navigation }) {
               </Modal.Content>
             </Modal>
           </Center>
+
+          <Center flex={1} px="3">
+            <Modal isOpen={showNote} onClose={() => setShowNote(false)}>
+              <Modal.Content maxWidth="400px">
+                <Modal.CloseButton />
+                <Modal.Header><Text style={styles.itemText}>{itemContent.title_set}</Text></Modal.Header>
+                <Modal.Body>
+                  <Text style={styles.itemText}>{itemContent.content_set}</Text>
+                </Modal.Body>
+              </Modal.Content>
+            </Modal>
+          </Center>
         </NativeBaseProvider>
-        </ScrollView>
-      </View>
+      </ScrollView>
+    </View>
   );
 }
 const styles = StyleSheet.create({
@@ -245,6 +222,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     borderColor: '#C0C0C0',
     borderWidth: 1,
+  },
+  itemText: {
+    maxWidth: '80%',
   },
   addText: {},
 });

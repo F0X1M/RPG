@@ -1,14 +1,13 @@
 import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
-
+import { useState, useEffect } from 'react';
 
 const Task = (props) => {
-    console.debug("HERE");
     return (
         <View style={styles.item}>
             <View style={styles.itemLeft}>
                 <View style={styles.square}></View>
-                <Text style={styles.itemText}>{props.text}</Text>
+                <Text style={styles.itemText}>{props.text.title_set}</Text>
             </View>
             <View style={styles.circular}></View>
         </View>
