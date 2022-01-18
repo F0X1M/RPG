@@ -45,7 +45,8 @@ function Tabs() {
 
 function Tabs2() {
   return (
-    <Tab.Navigator>
+    <Tab.Navigator screenOptions={{
+      headerShown:false}} >
       <Tab.Screen name='NotesScreen' component={NotesScreen} options={{
 				tabBarLabel: '',
 				tabBarIcon: ({ color, size }) => (<MaterialCommunityIcons name="notebook-outline" color={color} size={35} />),
@@ -87,10 +88,10 @@ export default function App() {
       <NavigationContainer>
         <Stack.Navigator initialRouteName="home" >
           <Stack.Screen name="home" component={HomeScreen} options={{ headerShown: false }}/>
-          <Stack.Screen name="DicesS" component={Tabs} options={{ headerShown: false }}/>
+          <Stack.Screen name="DicesS" component={Tabs} />
           <Stack.Screen name="HelpScr" component={HelpScreen} />
-          <Stack.Screen name="NotesScr" component={Tabs2} options={{ headerShown: false }}/>
-          <Stack.Screen name="Character" component={Tabs3} options={{ headerShown: false }}/>
+          <Stack.Screen name="NotesScr" component={Tabs2} />
+          <Stack.Screen name="Character" component={Tabs3} />
           <Stack.Screen name="CharC" component={CharCScreen} />
           <Stack.Screen name="Enemy" component={EnemyScreen} />
           <Stack.Screen name="roll4" component={roll4} />
