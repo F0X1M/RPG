@@ -3,7 +3,7 @@ import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 
 
 const Task = (props) => {
-
+    console.debug("HERE");
     return (
         <View style={styles.item}>
             <View style={styles.itemLeft}>

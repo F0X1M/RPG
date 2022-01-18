@@ -1,19 +1,22 @@
 import React, { Component, Fragment, useState, useEffect } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, TouchableOpacity, Text, View } from 'react-native';
 import { FormControl, Input, Modal, Fab, Icon, Button, Box, Center, NativeBaseProvider, TextArea } from "native-base"
 import { ScrollView } from 'react-native';
 import { MaterialCommunityIcons } from "@expo/vector-icons"
 import axios from 'axios';
 import {RPG_BASE_URL} from '../DBDetails.js';
 
+import Task from '../Components/Task';
+
 export default function notesscr({ navigation }) {
 
 
 
-  const [task, setTask] = useState();
+
+
   const [taskItems, setTaskItems] = useState([]);
 
-  
+
   const [id, setID] = useState(0);
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
@@ -22,6 +25,20 @@ export default function notesscr({ navigation }) {
 
   const [people, setPeople] = useState([])
   
+  const [task, setTask] = useState(
+  { 
+    title: ' ',
+  }
+  );
+
+
+  const handleAddTask = () => {
+    //Keyboard.dismiss();
+    setTaskItems([...taskItems, task])
+    //setTask(null);
+  }
+
+
   const hook = () => {
     axios.get(RPG_BASE_URL + '/notes')
       .then(response => {
@@ -55,6 +72,9 @@ export default function notesscr({ navigation }) {
   //console.log(title);
   //console.log(people);
   //console.log(people.length);
+  console.log(title);
+  console.log(content);
+  console.log(task);
   return (
 
 
@@ -69,7 +89,13 @@ export default function notesscr({ navigation }) {
             <Text style={styles.sectionTitle}>Notes</Text>
             <View style={styles.items}>
               {
-               
+              taskItems.map((item, index) => {
+                return (
+                  <TouchableOpacity key={index} onPress={() => completeTask(index)}>
+                    <Task text={item} />
+                  </TouchableOpacity>
+                )
+              })
               }
             </View>
           </View>
@@ -101,7 +127,7 @@ export default function notesscr({ navigation }) {
                 <Modal.Body>
                   <FormControl>
                     <FormControl.Label>Title</FormControl.Label>
-                    <Input placeholder="Title" onChangeText={message => setTitle(message)} />
+                    <Input placeholder="Title" onChangeText={message => setTask(message)} />
                   </FormControl>
                   <FormControl mt="1">
                     <FormControl.Label>Note Content</FormControl.Label>
@@ -122,7 +148,8 @@ export default function notesscr({ navigation }) {
                     <Button
                       onPress={() => {
                         setShowModal(false)
-
+                        handleAddTask()
+                        
                       }}
                     >
                       Save
