@@ -10,8 +10,9 @@ import Task from '../Components/Task';
 
 export default function notesscr({ navigation }) {
 
-  const [title_set, setTitle] = useState();
-  const [content_set, setContent] = useState();
+  const [id, setID] = useState(0);
+  const [title, setTitle] = useState();
+  const [content, setContent] = useState();
 
   const [showNote, setShowNote] = useState(false)
 
@@ -20,64 +21,51 @@ export default function notesscr({ navigation }) {
 
   const [taskItems, setTaskItems] = useState([]);
 
-  const [itemContent, setItemContent] = useState();
+  const [itemContent, setItemContent] = useState({ id, title, content });
 
 
-
+ // METODA PUT
+ // NAVIGACJE
   const checkItem = (item) => {
     setItemContent(item);
     setShowNote(true)
   }
   const handleAddTask = () => {
-    setTaskItems([...taskItems, { title_set, content_set }])
+    setTaskItems([...taskItems, {id, title, content}])
+    postData();
     setTitle(null);
   }
-
-  const hook = () => {
+  const getData = () => {
     axios.get(RPG_BASE_URL + '/notes')
-      .then(response => {
-        var data = response.data;
-        data.forEach(e => {
-          console.log(`${e.id}, ${e.title}, ${e.content}`);
-        });
+      .then(function (response) {
+        setTaskItems(response.data)
+        console.log(response);
       })
+      .catch(function (error) {
+        console.log(error);
+      });
+      
+  }
+
+
+  const postData = () => {
+    axios.post(RPG_BASE_URL + '/notes', {
+      id: id,
+      title: title,
+      content: content
+    })
+      .then(function (response) {
+        console.log(response);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
   }
   useEffect(
     () => {
-      hook()
+      getData()
     }
     , [])
-
-  console.log(taskItems)
-  //console.log(index_note)
-  //console.log('render', people.length, 'people');
-
-  // console.log('render', people.length, 'people');
-  /*
-  axios.post(RPG_BASE_URL + '/notes', {
-    firstName: '',
-    lastName: ''
-  })
-    .then(function (response) {
-      console.log(response);
-    })
-    .catch(function (error) {
-      console.log(error);
-    });
-  console.log('render', people.length, 'people');
-  */
-
-
-  //console.log(content);
-  //console.log(title);
-  //console.log(people);
-  //console.log(people.length);
-  //console.log(title_set)
-  //console.log(content_set)
-  //console.log(task)
-
-
-  console.log(taskItems.length)
 
   return (
 
@@ -168,9 +156,9 @@ export default function notesscr({ navigation }) {
             <Modal isOpen={showNote} onClose={() => setShowNote(false)}>
               <Modal.Content maxWidth="400px">
                 <Modal.CloseButton />
-                <Modal.Header><Text style={styles.itemText}>{itemContent.title_set}</Text></Modal.Header>
+                <Modal.Header><Text style={styles.itemText}>{itemContent.title}</Text></Modal.Header>
                 <Modal.Body>
-                  <Text style={styles.itemText}>{itemContent.content_set}</Text>
+                  <Text style={styles.itemText}>{itemContent.content}</Text>
                 </Modal.Body>
               </Modal.Content>
             </Modal>
