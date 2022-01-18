@@ -22,7 +22,7 @@ import roll20 from './screens/roll20';
 
 
 const Stack = createNativeStackNavigator();
-//const Tab = createBottomTabNavigator();
+const Tab = createBottomTabNavigator();
 
 function Tabs() {
   return (
