@@ -24,27 +24,35 @@ export default function notesscr({ navigation }) {
   const [itemContent, setItemContent] = useState({ id, title, content });
 
 
- // METODA PUT
- // NAVIGACJE
+  // METODA PUT
+  // NAVIGACJE
   const checkItem = (item) => {
     setItemContent(item);
     setShowNote(true)
   }
   const handleAddTask = () => {
-    setTaskItems([...taskItems, {id, title, content}])
+    setTaskItems([...taskItems, { id, title, content }])
     postData();
     setTitle(null);
   }
-  const getData = () => {
-    axios.get(RPG_BASE_URL + '/notes')
-      .then(function (response) {
-        setTaskItems(response.data)
-        console.log(response);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-      
+  const getData = async () => {
+    try {
+
+      const response = await axios.get(RPG_BASE_URL + '/notes')
+
+      console.log(response.data)
+      setTaskItems(response.data)
+    } catch(error) {
+      console.error(error)
+    }
+      // .then(function (response) {
+      //   setTaskItems(response.data)
+      //   console.log(response);
+      // })
+      // .catch(function (error) {
+      //   console.log(error);
+      // });
+
   }
 
 
@@ -81,7 +89,7 @@ export default function notesscr({ navigation }) {
           <Text style={styles.sectionTitle}>Notes</Text>
           <View style={styles.items}>
             {
-              taskItems.map((item, index) => {
+              taskItems && taskItems.map((item, index) => {
                 return (
                   <TouchableOpacity key={index} onPress={() => checkItem(item)}>
                     <Task text={item} />
