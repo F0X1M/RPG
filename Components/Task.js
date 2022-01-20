@@ -1,14 +1,15 @@
 import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
-
+import { View, Text, StyleSheet, TouchableOpacity} from 'react-native';
+import { useState, useEffect } from 'react';
+import { Icon } from 'native-base';
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 const Task = (props) => {
-    console.debug("HERE");
     return (
         <View style={styles.item}>
             <View style={styles.itemLeft}>
-                <View style={styles.square}></View>
-                <Text style={styles.itemText}>{props.text}</Text>
+                <Icon as={MaterialCommunityIcons} name="notebook-outline"></Icon>
+                <Text style={styles.itemText}>{props.text.title}</Text>
             </View>
             <View style={styles.circular}></View>
         </View>
@@ -30,7 +31,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         flexWrap: 'wrap'
     },
-    square: {
+    icobg: {
         width: 24,
         height: 24,
         backgroundColor: '#55BCF6',
@@ -40,6 +41,8 @@ const styles = StyleSheet.create({
     },
     itemText: {
         maxWidth: '80%',
+        padding: 10,
+        fontSize: 15
     },
     circular: {
         width: 12,
