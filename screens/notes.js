@@ -1,6 +1,6 @@
 import React, { Component, Fragment, useState, useEffect } from 'react';
 import { StyleSheet, TouchableOpacity, Text, View } from 'react-native';
-import { FormControl, Input, Modal, Fab, Icon, Button, Box, Center, NativeBaseProvider, TextArea } from "native-base"
+import { Menu, FormControl, Input, Modal, Button, Center, NativeBaseProvider, TextArea } from "native-base"
 import { ScrollView } from 'react-native';
 import { MaterialCommunityIcons } from "@expo/vector-icons"
 import axios from 'axios';
@@ -22,6 +22,9 @@ export default function notesscr({ navigation }) {
   const [taskItems, setTaskItems] = useState([]);
 
   const [itemContent, setItemContent] = useState({ id, title, content });
+
+  const [shouldOverlapWithTrigger] = React.useState(false)
+  const [position, setPosition] = React.useState("auto")
 
 
   // METODA PUT
@@ -50,7 +53,7 @@ export default function notesscr({ navigation }) {
       //   console.log(response);
       // })
       // .catch(function (error) {
-      //   console.log(error);
+tz      //   console.log(error);
       // });
 
   }
@@ -69,6 +72,33 @@ export default function notesscr({ navigation }) {
         console.log(error);
       });
   }
+
+  const putData = (index) => {
+    axios.put(RPG_BASE_URL + '/notes/'+index,{
+      id: id,
+      title: title,
+      content: content
+    })
+      .then(function (response) {
+        console.log(response);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }
+
+
+  const removeData = (index) => {
+    axios.delete(RPG_BASE_URL + '/notes/'+index)
+      .then(function (response) {
+        console.log(response);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+      getData();
+  }
+
   useEffect(
     () => {
       getData()
@@ -76,10 +106,6 @@ export default function notesscr({ navigation }) {
     , [])
 
   return (
-
-
-
-
     <View style={styles.container}>
       <ScrollView
         contentContainerStyle={{
@@ -101,24 +127,21 @@ export default function notesscr({ navigation }) {
         </View>
 
         <NativeBaseProvider>
-          <Center flex={1} px="3">
-            <Box h={400} w="100%">
-              <Fab
-                borderRadius="full"
-                colorScheme="indigo"
-                placement="bottom-right"
-                onPress={() => setShowModal(true)}
-                icon={
-                  <Icon
-                    color="white"
-                    as={<MaterialCommunityIcons name="file-plus-outline" />}
-                    size="4"
-                  />
-                }
-                label="New note"
-              />
-            </Box>
-          </Center>
+            <Menu
+              w="100"
+              shouldOverlapWithTrigger={shouldOverlapWithTrigger} // @ts-ignore
+              placement={position == "auto" ? undefined : position}
+              trigger={(triggerProps) => {
+                return (
+                  <Button alignSelf="center" variant="solid" {...triggerProps} style={styles.NoteButton}>
+                    Note Menu
+                  </Button>
+                )
+              }}
+            >
+              <Menu.Item alignItems={"center"} onPress={() => setShowModal(true)}>Add</Menu.Item>
+            <Menu.Item alignItems={"center"} onPress={() => removeData(itemContent.id)}>Delete</Menu.Item>
+            </Menu>
 
           <Center flex={1} px="3">
             <Modal isOpen={showModal} onClose={() => setShowModal(false)}>
@@ -176,6 +199,7 @@ export default function notesscr({ navigation }) {
     </View>
   );
 }
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -221,6 +245,9 @@ const styles = StyleSheet.create({
   },
   itemText: {
     maxWidth: '80%',
+  },
+  NoteButton: {
+    borderRadius: 20
   },
   addText: {},
 });
