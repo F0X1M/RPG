@@ -205,6 +205,7 @@ export default function notesscr({ navigation }) {
                       colorScheme="blueGray"
                       onPress={() => {
                         removeData(itemContent.id)
+                        setShowNoteEdit(false)
                       }}
                     >
                       Delete

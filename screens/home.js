@@ -207,6 +207,5 @@ const styles = StyleSheet.create({
     paddingTop: '15%',
     paddingLeft: 5,
     fontSize: 15,
-    fontFamily: 'Arial',
   }
 });

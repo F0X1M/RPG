@@ -1,1 +1,1 @@
-export const RPG_BASE_URL = 'https://ba79-31-0-49-118.ngrok.io';
+export const RPG_BASE_URL = 'https://b628-185-124-119-11.ngrok.io';
