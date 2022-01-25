@@ -4,7 +4,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { NativeBaseProvider } from 'native-base';
-import {createDrawerNavigator,DrawerContentScrollView,DrawerItemList,DrawerItem,} from '@react-navigation/drawer';
+import {createDrawerNavigator} from '@react-navigation/drawer';
 
 import HomeScreen from './screens/home';
 import DicesScreen from './screens/dices';
@@ -26,23 +26,22 @@ const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 const Drawer = createDrawerNavigator();
 
-// function dicesdraw(){
-//   return (
-//     <Drawer.Navigator
-//       screenOptions={{ headerShown:false, drawerActiveBackgroundColor: '#aa18ea', drawerActiveTintColor: '#fff', drawerInactiveTintColor: '#333',drawerLabelStyle: {}}}>
-//       <Drawer.Screen name="dice4" component={roll4} />
-//       <Drawer.Screen name="dice6" component={roll6} />
-//       <Drawer.Screen name="dice8" component={roll8} />
-//       <Drawer.Screen name="dice10" component={roll10} />
-//       <Drawer.Screen name="dice12" component={roll12} />
-//       <Drawer.Screen name="dice20" component={roll20} />
-//     </Drawer.Navigator>
-//    );
-// }
+ function Draw(){
+   return (
+     <Drawer.Navigator
+       screenOptions={{ headerShown:false}}>
+       <Drawer.Screen name="Home" component={HomeScreen} />
+       <Drawer.Screen name="Dices" component={Tabs} />
+       <Drawer.Screen name="Notes" component={Tabs2} />
+       <Drawer.Screen name="Character" component={Tabs3} />
+       <Drawer.Screen name="Enemy" component={EnemyScreen} />
+     </Drawer.Navigator>
+    );
+ }
 
 function Tabs() {
   return (
-    <Tab.Navigator>
+    <Tab.Navigator screenOptions={{ headerShown: false }}>
       <Tab.Screen name='DicesScreen' component={DicesScreen} options={{
 				tabBarLabel: '',
 				tabBarIcon: ({ color, size }) => (<MaterialCommunityIcons name="dice-multiple" color={color} size={35} />),
@@ -81,7 +80,7 @@ function Tabs2() {
 
 function Tabs3() {
   return (
-    <Tab.Navigator>
+    <Tab.Navigator screenOptions={{ headerShown: false }}>
       <Tab.Screen name='CharScreen' component={CharScreen} options={{
 				tabBarLabel: '',
 				tabBarIcon: ({ color, size }) => (<MaterialCommunityIcons name="account-group" color={color} size={35} />),
@@ -103,7 +102,7 @@ export default function App() {
   <NativeBaseProvider>
       <NavigationContainer>
         <Stack.Navigator initialRouteName="home" >
-          <Stack.Screen name="home" component={HomeScreen} options={{ headerShown: false }}/>
+          <Stack.Screen name="home" component={Draw} options={{ headerShown: false }}/>
           <Stack.Screen name="DicesS" component={Tabs} />
           <Stack.Screen name="HelpScr" component={HelpScreen} />
           <Stack.Screen name="NotesScr" component={Tabs2} />
