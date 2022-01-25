@@ -15,8 +15,9 @@ export default function notesscr({ navigation }) {
   const [content, setContent] = useState();
 
   const [showNote, setShowNote] = useState(false)
+  const [showNoteEdit, setShowNoteEdit] = useState(false)
 
-
+  const [currentIndex, setCurrentIndex] = useState(0);
   const [showModal, setShowModal] = useState(false)
 
   const [taskItems, setTaskItems] = useState([]);
@@ -27,8 +28,6 @@ export default function notesscr({ navigation }) {
   const [position, setPosition] = React.useState("auto")
 
 
-  // METODA PUT
-  // NAVIGACJE
   const checkItem = (item) => {
     setItemContent(item);
     setShowNote(true)
@@ -45,17 +44,9 @@ export default function notesscr({ navigation }) {
 
       console.log(response.data)
       setTaskItems(response.data)
-    } catch(error) {
+    } catch (error) {
       console.error(error)
     }
-      // .then(function (response) {
-      //   setTaskItems(response.data)
-      //   console.log(response);
-      // })
-      // .catch(function (error) {
-tz      //   console.log(error);
-      // });
-
   }
 
 
@@ -74,7 +65,7 @@ tz      //   console.log(error);
   }
 
   const putData = (index) => {
-    axios.put(RPG_BASE_URL + '/notes/'+index,{
+    axios.put(RPG_BASE_URL + '/notes/' + index, {
       id: id,
       title: title,
       content: content
@@ -85,18 +76,19 @@ tz      //   console.log(error);
       .catch(function (error) {
         console.log(error);
       });
+    getData()
   }
 
 
   const removeData = (index) => {
-    axios.delete(RPG_BASE_URL + '/notes/'+index)
+    axios.delete(RPG_BASE_URL + '/notes/' + index)
       .then(function (response) {
         console.log(response);
       })
       .catch(function (error) {
         console.log(error);
       });
-      getData();
+    getData();
   }
 
   useEffect(
@@ -104,7 +96,6 @@ tz      //   console.log(error);
       getData()
     }
     , [])
-
   return (
     <View style={styles.container}>
       <ScrollView
@@ -127,21 +118,22 @@ tz      //   console.log(error);
         </View>
 
         <NativeBaseProvider>
-            <Menu
-              w="100"
-              shouldOverlapWithTrigger={shouldOverlapWithTrigger} // @ts-ignore
-              placement={position == "auto" ? undefined : position}
-              trigger={(triggerProps) => {
-                return (
-                  <Button alignSelf="center" variant="solid" {...triggerProps} style={styles.NoteButton}>
-                    Note Menu
-                  </Button>
-                )
-              }}
-            >
-              <Menu.Item alignItems={"center"} onPress={() => setShowModal(true)}>Add</Menu.Item>
+          <Menu
+            w="100"
+            shouldOverlapWithTrigger={shouldOverlapWithTrigger} // @ts-ignore
+            placement={position == "auto" ? undefined : position}
+            trigger={(triggerProps) => {
+              return (
+                <Button alignSelf="center" variant="solid" {...triggerProps} style={styles.NoteButton}>
+                  Note Menu
+                </Button>
+              )
+            }}
+          >
+            <Menu.Item alignItems={"center"} onPress={() => setShowModal(true)}>Add</Menu.Item>
+            <Menu.Item alignItems={"center"} onPress={() => setShowNoteEdit(true)}>Update</Menu.Item>
             <Menu.Item alignItems={"center"} onPress={() => removeData(itemContent.id)}>Delete</Menu.Item>
-            </Menu>
+          </Menu>
 
           <Center flex={1} px="3">
             <Modal isOpen={showModal} onClose={() => setShowModal(false)}>
@@ -176,6 +168,46 @@ tz      //   console.log(error);
                       }}
                     >
                       Save
+                    </Button>
+                  </Button.Group>
+                </Modal.Footer>
+              </Modal.Content>
+            </Modal>
+          </Center>
+
+          <Center flex={1} px="3">
+            <Modal isOpen={showNoteEdit} onClose={() => setShowNoteEdit(false)}>
+              <Modal.Content maxWidth="400px">
+                <Modal.CloseButton />
+                <Modal.Header>Edit note</Modal.Header>
+                <Modal.Body>
+                  <FormControl>
+                    <FormControl.Label>Title</FormControl.Label>
+                    <Input placeholder="Title" onChangeText={message => setTitle(message)} />
+                  </FormControl>
+                  <FormControl mt="1">
+                    <FormControl.Label>Note Content</FormControl.Label>
+                    <TextArea placeholder="Note" onChangeText={message => setContent(message)}></TextArea>
+                  </FormControl>
+                </Modal.Body>
+                <Modal.Footer>
+                  <Button.Group space={1}>
+                    <Button
+                      variant="ghost"
+                      colorScheme="blueGray"
+                      onPress={() => {
+                        setShowNoteEdit(false)
+                      }}
+                    >
+                      Cancel
+                    </Button>
+                    <Button
+                      onPress={() => {
+                        putData(itemContent.id);
+                        setShowNoteEdit(false)
+                      }}
+                    >
+                      Update
                     </Button>
                   </Button.Group>
                 </Modal.Footer>
