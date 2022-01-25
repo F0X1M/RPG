@@ -131,8 +131,7 @@ export default function notesscr({ navigation }) {
             }}
           >
             <Menu.Item alignItems={"center"} onPress={() => setShowModal(true)}>Add</Menu.Item>
-            <Menu.Item alignItems={"center"} onPress={() => setShowNoteEdit(true)}>Update</Menu.Item>
-            <Menu.Item alignItems={"center"} onPress={() => removeData(itemContent.id)}>Delete</Menu.Item>
+            <Menu.Item alignItems={"center"} onPress={() => setShowNoteEdit(true)}>Edit</Menu.Item>
           </Menu>
 
           <Center flex={1} px="3">
@@ -202,12 +201,21 @@ export default function notesscr({ navigation }) {
                       Cancel
                     </Button>
                     <Button
+                      variant="ghost"
+                      colorScheme="blueGray"
+                      onPress={() => {
+                        removeData(itemContent.id)
+                      }}
+                    >
+                      Delete
+                    </Button>
+                    <Button
                       onPress={() => {
                         putData(itemContent.id);
                         setShowNoteEdit(false)
                       }}
                     >
-                      Update
+                      Save
                     </Button>
                   </Button.Group>
                 </Modal.Footer>

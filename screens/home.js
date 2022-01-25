@@ -59,6 +59,7 @@ export default function home({navigation}) {
               },
             }}
           >
+          <View style={styles.iconBox}>
             <IconButton
               mb="4"
               variant="solid"
@@ -77,7 +78,9 @@ export default function home({navigation}) {
                   color="warmGray.50"
                 />
               }
-            />
+            /><Text style={styles.ButtonText}>text</Text>
+          </View>
+          <View style={styles.iconBox}>
             <IconButton
               mb="4"
               variant="solid"
@@ -96,7 +99,9 @@ export default function home({navigation}) {
                   color="warmGray.50"
                 />
               }
-            />
+            /><Text style={styles.ButtonText}>text</Text>
+          </View>
+          <View style={styles.iconBox}>
             <IconButton
               mb="4"
               variant="solid"
@@ -115,7 +120,9 @@ export default function home({navigation}) {
                   color="warmGray.50"
                 />
               }
-            />
+            /><Text style={styles.ButtonText}>text</Text>
+          </View>
+          <View style={styles.iconBox}>
             <IconButton
               mb="4"
               variant="solid"
@@ -134,7 +141,9 @@ export default function home({navigation}) {
                   color="warmGray.50"
                 />
               }
-            />
+            /><Text style={styles.ButtonText}>text</Text>
+          </View>
+          <View style={styles.iconBox}>
             <IconButton
               mb="4"
               variant="solid"
@@ -153,7 +162,8 @@ export default function home({navigation}) {
                   color="warmGray.50"
                 />
               }
-            />
+            /><Text style={styles.ButtonText}>text</Text>
+          </View>
           </Stagger>
         </Box>
         <HStack alignItems="center">
@@ -184,9 +194,19 @@ export default function home({navigation}) {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    flex: 3,
     backgroundColor: '#ccc',
     alignItems: 'center',
     justifyContent: 'center',
   },
+  iconBox:{
+    flexDirection: "row",
+    justifyContent: "space-around",
+  },
+  ButtonText:{
+    paddingTop: '15%',
+    paddingLeft: 5,
+    fontSize: 15,
+    fontFamily: 'Arial',
+  }
 });
