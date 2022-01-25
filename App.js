@@ -28,8 +28,7 @@ const Drawer = createDrawerNavigator();
 
  function Draw(){
    return (
-     <Drawer.Navigator
-       screenOptions={{ headerShown:false}}>
+     <Drawer.Navigator>
        <Drawer.Screen name="Home" component={HomeScreen} />
        <Drawer.Screen name="Dices" component={Tabs} />
        <Drawer.Screen name="Notes" component={Tabs2} />
