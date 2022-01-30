@@ -4,6 +4,10 @@ import { useState, useEffect } from 'react';
 import { Icon } from 'native-base';
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
+
+// funkcja task przyjmuje parametr props, argumenty przekazane do komponentu w react
+// w returnie wywolujesz jak wyglada 
+//
 const Task = (props) => {
     return (
         <View style={styles.item}>
@@ -15,6 +19,8 @@ const Task = (props) => {
         </View>
     )
 }
+
+//style
 
 const styles = StyleSheet.create({
     item: {

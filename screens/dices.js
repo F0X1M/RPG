@@ -1,16 +1,20 @@
 import * as React from 'react';
 import { View, Text, StyleSheet, Image, ScrollView, TouchableOpacity } from "react-native";
-import { useNavigation } from "@react-navigation/core";
+import { useNavigation } from "@react-navigation/core";// impotrujesz komponent ktory potrzebny jest by uzyc stworzonej nawigacji
 
+//funkcja kosci
 const DicesS = () => {
-  const navigation = useNavigation();
+  const navigation = useNavigation();//inicjujesz uzycie nawigacji
   return (
+//scrollview widok pozwalajacy na scrolowanie, pozwala na przesuwanie dotykiem
   <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
 	  <View style={{justifyContent: 'center', alignItems: 'center', backgroundColor:'#ccc'}}>
 		<Text style={styles.text}>
 			  Wybierz kość
 		</Text>
-
+{
+	//po kliknieciu na kostke 4 przenosi cie do ekranu losowania kostka 4
+}
 		<TouchableOpacity style={{position: "relative", marginTop: 20 }} onPress={() => navigation.navigate('roll4')} >
 			<Image
 			style={{
@@ -29,7 +33,10 @@ const DicesS = () => {
 			}}>
 			d4
 		</Text>
-		<TouchableOpacity style={{ position: "relative", marginTop: 20 }} onPress={() => navigation.navigate('roll6')} >
+{
+//po kliknieciu na kostke 6 przenosi cie do ekranu losowania kostka 6
+}
+<TouchableOpacity style={{ position: "relative", marginTop: 20 }} onPress={() => navigation.navigate('roll6')} >
 		<Image
 			style={{
 			width: 150,
@@ -47,6 +54,10 @@ const DicesS = () => {
 			}}>
 			d6
 		</Text>
+
+			  {
+				  //po kliknieciu na kostke 4 przenosi cie do ekranu losowania kostka 8
+			  }
 		<TouchableOpacity style={{ position: "relative", marginTop: 20 }} onPress={() => navigation.navigate('roll8')} >
 		<Image
 			style={{
@@ -65,6 +76,10 @@ const DicesS = () => {
 			}}>
 			d8
 		</Text>
+
+			  {
+				  //po kliknieciu na kostke 4 przenosi cie do ekranu losowania kostka 10
+			  }
 		<TouchableOpacity style={{ position: "relative", marginTop: 20 }} onPress={() => navigation.navigate('roll10')} >
 		<Image
 			style={{
@@ -83,6 +98,10 @@ const DicesS = () => {
 			}}>
 			d10
 		</Text>
+
+			  {
+				  //po kliknieciu na kostke 4 przenosi cie do ekranu losowania kostka 12
+			  }
 		<TouchableOpacity style={{ position: "relative", marginTop: 20 }} onPress={() => navigation.navigate('roll12')} >
 		<Image
 			style={{
@@ -101,6 +120,11 @@ const DicesS = () => {
 			}}>
 			d12
 		</Text>
+			  {
+				  //po kliknieciu na kostke 4 przenosi cie do ekranu losowania kostka 20
+				  //on press dotkniecie
+				  //=> navigation.navigate('roll20')} >  przenosi do roll 20
+			  }
 		<TouchableOpacity style={{ position: "relative", marginTop: 20 }} onPress={() => navigation.navigate('roll20')} >
 		<Image
 			style={{
@@ -123,7 +147,7 @@ const DicesS = () => {
 	</ScrollView>
 	);
 };
-
+//style
 const styles = StyleSheet.create({
   text: {
     position: "relative",

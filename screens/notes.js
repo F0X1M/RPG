@@ -1,42 +1,47 @@
-import React, { Component, Fragment, useState, useEffect } from 'react';
+import React, { Component, Fragment, useState, useEffect } from 'react';// importuje komponenty
 import { StyleSheet, TouchableOpacity, Text, View } from 'react-native';
 import { Menu, FormControl, Input, Modal, Button, Center, NativeBaseProvider, TextArea } from "native-base"
 import { ScrollView } from 'react-native';
 import { MaterialCommunityIcons } from "@expo/vector-icons"
-import axios from 'axios';
+import axios from 'axios'; // do polaczenia z baza danych
 import { RPG_BASE_URL } from '../DBDetails.js';
 
-import Task from '../Components/Task';
-
+import Task from '../Components/Task'; // importuje taski->>>>>> nasze notatki
+//głowna funkcja notatek
 export default function notesscr({ navigation }) {
 
-  const [id, setID] = useState(0);
-  const [title, setTitle] = useState();
-  const [content, setContent] = useState();
+  const [id, setID] = useState(0); //id notatki
+  const [title, setTitle] = useState();// tytul notatki
+  const [content, setContent] = useState();//zawartosc notatki
 
-  const [showNote, setShowNote] = useState(false)
-  const [showNoteEdit, setShowNoteEdit] = useState(false)
+  const [showNote, setShowNote] = useState(false) // ustawia czy pokazac notatke
+  const [showNoteEdit, setShowNoteEdit] = useState(false)// ustawia czy pokozac notatke do edycji czy nie
 
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [showModal, setShowModal] = useState(false)
+  const [currentIndex, setCurrentIndex] = useState(0); //aktualny indeks notatki
+  const [showModal, setShowModal] = useState(false) //ustawia czy pokzac modal
 
-  const [taskItems, setTaskItems] = useState([]);
+  const [taskItems, setTaskItems] = useState([]);//ustawia  wszystkie notatki
 
-  const [itemContent, setItemContent] = useState({ id, title, content });
+  const [itemContent, setItemContent] = useState({ id, title, content });// ustawia nam kontent notatki jednej
 
   const [shouldOverlapWithTrigger] = React.useState(false)
   const [position, setPosition] = React.useState("auto")
 
+/*
+funkcja ktora ustawia kontent/ zawartosc notatki 
 
+*/
   const checkItem = (item) => {
     setItemContent(item);
     setShowNote(true)
   }
+  //dodaje jedna notatke
   const handleAddTask = () => {
     setTaskItems([...taskItems, { id, title, content }])
     postData();
     setTitle(null);
   }
+  //pobiera notatki z bazy danych przy użyciu axiosa
   const getData = async () => {
     try {
 
@@ -49,7 +54,7 @@ export default function notesscr({ navigation }) {
     }
   }
 
-
+//dodaje   przy użyciu axiosa notatke 
   const postData = () => {
     axios.post(RPG_BASE_URL + '/notes', {
       id: id,
@@ -63,7 +68,7 @@ export default function notesscr({ navigation }) {
         console.log(error);
       });
   }
-
+//aktualizuje notatke po identyfikatorze
   const putData = (index) => {
     axios.put(RPG_BASE_URL + '/notes/' + index, {
       id: id,
@@ -79,7 +84,7 @@ export default function notesscr({ navigation }) {
     getData()
   }
 
-
+//.usuwa notatke po id
   const removeData = (index) => {
     axios.delete(RPG_BASE_URL + '/notes/' + index)
       .then(function (response) {
@@ -90,14 +95,21 @@ export default function notesscr({ navigation }) {
       });
     getData();
   }
-
+//wywola sie raz przy wejsciu do ekranu i pobiera baze danych
   useEffect(
     () => {
       getData()
     }
     , [])
+
+  {
+    //wywołują się notatki  i się rysują
+   // taskItems && taskItems.map((item, index)  ---- wyswietla wszystkkie notatki
+    //<TouchableOpacity key={index} onPress={() => checkItem(item)}>----po dotknieciu wyswietla sie bo wywoluje komponent task
+  }
   return (
-    <View style={styles.container}>
+    
+    <View style={styles.container}> 
       <ScrollView
         contentContainerStyle={{
           flexGrow: 1
@@ -116,7 +128,9 @@ export default function notesscr({ navigation }) {
             }
           </View>
         </View>
-
+{
+  //po wcisnieciu pojawia sie menu notatki gdzie mozna wybrac opcje dodania lub edycji 
+}
         <NativeBaseProvider>
           <Menu
             w="100"
@@ -133,7 +147,10 @@ export default function notesscr({ navigation }) {
             <Menu.Item alignItems={"center"} onPress={() => setShowModal(true)}>Add</Menu.Item>
             <Menu.Item alignItems={"center"} onPress={() => setShowNoteEdit(true)}>Edit</Menu.Item>
           </Menu>
-
+{
+  //otwieranie notatki gdzie mozna wpisac tytuł i tresc notatki
+  //są tu przyciski zapisz i przerwij
+}
           <Center flex={1} px="3">
             <Modal isOpen={showModal} onClose={() => setShowModal(false)}>
               <Modal.Content maxWidth="400px">
@@ -174,6 +191,10 @@ export default function notesscr({ navigation }) {
             </Modal>
           </Center>
 
+{
+  //po wcisnieciu edycji mozna edytpowac notatke 
+// zmiana tytulu, tresci , zapisania, cofnac i usunąć
+}
           <Center flex={1} px="3">
             <Modal isOpen={showNoteEdit} onClose={() => setShowNoteEdit(false)}>
               <Modal.Content maxWidth="400px">
@@ -224,6 +245,9 @@ export default function notesscr({ navigation }) {
             </Modal>
           </Center>
 
+{
+// pokazywanie notatki po wcisnieciu
+}
           <Center flex={1} px="3">
             <Modal isOpen={showNote} onClose={() => setShowNote(false)}>
               <Modal.Content maxWidth="400px">
@@ -240,6 +264,9 @@ export default function notesscr({ navigation }) {
     </View>
   );
 }
+
+
+//style
 
 const styles = StyleSheet.create({
   container: {

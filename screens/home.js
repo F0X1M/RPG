@@ -1,7 +1,7 @@
-import React, {Component, Fragment} from 'react';
-import { StatusBar } from 'expo-status-bar';
-import { createStackNavigator } from '@react-navigation/stack';
-import { StyleSheet, View, Text, SafeAreaView, TextInput, Image, TouchableOpacity, Button } from 'react-native';
+import React, {Component, Fragment} from 'react'; //importuje  komponenty ktore uzywamy i fragmenty
+import { StatusBar } from 'expo-status-bar';  //importuje  komponenty   
+import { createStackNavigator } from '@react-navigation/stack'; //importuje nawigacja  trzy kropki na ekranie startowym
+import { StyleSheet, View, Text, SafeAreaView, TextInput, Image, TouchableOpacity, Button } from 'react-native'; // importuje style, przyciski ,obrazki itp
 import {
   Box,
   useDisclose,
@@ -12,17 +12,25 @@ import {
   Center,
   NativeBaseProvider,
   ZStack,
-} from "native-base"
-import { MaterialCommunityIcons} from "@expo/vector-icons";
-import { NavigationContainer } from '@react-navigation/native';
+} from "native-base" //importuje komponenty z native base
+import { MaterialCommunityIcons} from "@expo/vector-icons"; // importujesz wyglad ikony
+import { NavigationContainer } from '@react-navigation/native'; //importujesz nawigacje container
 
-
-
+// funkcja ekranu startowego
 export default function home({navigation}) {
-    const { isOpen, onToggle } = useDisclose()
+    const { isOpen, onToggle } = useDisclose()// kontroluje otwieranie zamykanie
   return (
+   // <View style={styles.container}> //przetrzymuje style
+   /*Box - niebieskie koleczko z 3 kropkami
+    visible={isOpen}  jest widoczny gdy jest otwarty
+    opacity- nieeprzezroczystosc
+translateY ??????
+
+
+animate- jak sie klika podskakuje do góry 
+   */
     <NativeBaseProvider>
-        <View style = {styles.container}>
+        <View style = {styles.container}> //przetrzymuje style
       <Box>
         <Box alignItems="center" minH="280">
           <Stagger
@@ -59,6 +67,16 @@ export default function home({navigation}) {
               },
             }}
           >
+
+              {
+               /* onPress = {()=>navigation.navigate('NotesScr')}  po kliknieciu przechodzi do notatek
+
+
+
+
+               */
+              }
+
           <View style={styles.iconBox}>
             <IconButton
               mb="4"
@@ -66,6 +84,7 @@ export default function home({navigation}) {
               bg="purple.500"
               colorScheme="purple"
               borderRadius="full"
+              
               onPress = {()=>navigation.navigate('NotesScr')}
               icon={
                 <Icon
@@ -87,6 +106,8 @@ export default function home({navigation}) {
               bg="indigo.500"
               colorScheme="indigo"
               borderRadius="full"
+
+              
               onPress = {()=>navigation.navigate('Character')}
               icon={
                 <Icon
@@ -191,19 +212,19 @@ export default function home({navigation}) {
     </NativeBaseProvider>
   );
 }
-
+//style
 const styles = StyleSheet.create({
-  container: {
+  container: { //ustawwienia konteneru
     flex: 3,
     backgroundColor: '#ccc',
     alignItems: 'center',
     justifyContent: 'center',
   },
-  iconBox:{
+  iconBox: {//ustawwienia boxu
     flexDirection: "row",
     justifyContent: "space-around",
   },
-  ButtonText:{
+  ButtonText: {//ustawwienia przycisku
     paddingTop: '15%',
     paddingLeft: 5,
     fontSize: 15,
