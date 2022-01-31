@@ -4,18 +4,23 @@ import { StyleSheet, Text, View } from 'react-native';
 import { AlertDialog, Center, NativeBaseProvider } from "native-base"
 
 export default function help({navigation}) {
-  
-  const [isOpen, setIsOpen] = React.useState(true)
-  const onClose = () => setIsOpen(false)
-  const cancelRef = React.useRef(null)
+  /*
+//const-stałą
+useState - zminenna ktora ma przypisana funkcje i przy pomocy funkcji moge przypisywac wartosc tej zmiennej
+przyk  
+const [zmienna, ustaw_zmienna]= useState(wartosc Startowa lub poczatkowa)
+  */
+  const [isOpen, setIsOpen] = React.useState(true)  
+  const onClose = () => setIsOpen(false) // podczas zamkniecia usawia isOpen na fałsz
+  const cancelRef = React.useRef(null)//cofnij cos ......
   
   return (
   <NativeBaseProvider>
     <Center>
       <AlertDialog
-        leastDestructiveRef={cancelRef}
-        isOpen={isOpen}
-        onClose={onClose, ()=> navigation.navigate('home')}
+        leastDestructiveRef={cancelRef} 
+        isOpen={isOpen} //sprawdza czy jest otwarte czy nie
+        onClose={onClose, ()=> navigation.navigate('home')} // zamkyka i przechodzi do ekranu home
       >
 		  <AlertDialog.Content>
 			<AlertDialog.CloseButton />
@@ -46,7 +51,7 @@ export default function help({navigation}) {
   </NativeBaseProvider> 
   );
 }
-
+//style
 const styles = StyleSheet.create({
   container: {
     flex: 1,

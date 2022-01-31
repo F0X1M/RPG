@@ -3,7 +3,8 @@ import { View, Text, StyleSheet, Image, ScrollView, TouchableOpacity } from "rea
 import { AlertDialog, Button, Center, NativeBaseProvider } from "native-base"
 import { useNavigation } from "@react-navigation/core";
 
-export default function enemies({navigation}) {
+
+export default function enemies({navigation}) { //funkcja enemis przyjmuje nawigacja jako parametr
 	const [isOpen, setIsOpen] = React.useState(false)
 	const [isOpen2, setIsOpen2] = React.useState(false)
 	const [isOpen3, setIsOpen3] = React.useState(false)
@@ -15,15 +16,19 @@ export default function enemies({navigation}) {
 	const onClose4 = () => setIsOpen4(false)
 
   
-	const cancelRef = React.useRef(null)
+	const cancelRef = React.useRef(null) //czysci referencje  na  null ustawionny
 	const cancelRef2 = React.useRef(null)
 	const cancelRef3 = React.useRef(null)
 	const cancelRef4 = React.useRef(null)
-  return (
+ //przesuwanie palcemm  ScrollView
+ //tyknąć mogę TouchableOpacity
+ //onPresss jesli odkryje tyknięcie to IsOpen ustawiany jest na prawde 
+ 
+ return (
 <NativeBaseProvider>
-  <ScrollView contentContainerStyle={{ flexGrow: 1 , backgroundColor:'grey'}}>
+  <ScrollView contentContainerStyle={{ flexGrow: 1 , backgroundColor:'grey'}}> 
     <View style={{justifyContent: 'center', alignItems: 'center', flexDirection:"row"}}>
-      <TouchableOpacity style={{position: "relative", padding: 10 }} onPress={() => setIsOpen(!isOpen)} >
+      <TouchableOpacity style={{position: "relative", padding: 10 }} onPress={() => setIsOpen(!isOpen)} > 
 			  <Image
 			    style={{
 				    backgroundColor: "#BBB",
@@ -73,6 +78,8 @@ export default function enemies({navigation}) {
       </TouchableOpacity>
     </View>
   </ScrollView>
+
+  
   <Center>
 		<AlertDialog
 		  leastDestructiveRef={cancelRef}

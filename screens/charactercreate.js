@@ -2,9 +2,11 @@ import React, {Component, Fragment} from 'react';
 import { StyleSheet, View, Button } from 'react-native';
 import {Select, VStack, CheckIcon, TextArea, Radio, Text, Center, NativeBaseProvider} from "native-base"
 
+///charctercreate przyjmuje parametr nawigacje
 export default function charactercreate({navigation}) {
-  const [value, setValue] = React.useState("one")
-  let [service, setService] = React.useState("")
+  const [value, setValue] = React.useState("one") //
+  let [service, setService] = React.useState("") //let może być zmieniana dzięki operatorowi =, 
+                                                //a const nie może trzeba zmienić przy pomocy funkcji  
   return (
     <NativeBaseProvider>
       <Center>

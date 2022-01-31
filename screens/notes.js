@@ -7,7 +7,11 @@ import axios from 'axios'; // do polaczenia z baza danych
 import { RPG_BASE_URL } from '../DBDetails.js';
 
 import Task from '../Components/Task'; // importuje taski->>>>>> nasze notatki
-//głowna funkcja notatek
+// - należy w aplikacji wykorzystać trzy metody dostępu do danych za pomocą API (GET, POST, PUT)
+
+//   głowna funkcja notatek
+
+
 export default function notesscr({ navigation }) {
 
   const [id, setID] = useState(0); //id notatki
